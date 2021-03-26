@@ -1,0 +1,47 @@
+{% extends 'store/base.html'%}
+{% load static %}
+{% block title %} Cart {% endblock title %}
+{% block content %}
+<h3>cart</h3>
+<br>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card">
+            <div class="card-body">
+                <a href="" class="btn btn-outline-default" href="{% url 'store' %}"><i class="fas fa-chevron-left"></i> Continue Shopping</a>
+                <div class="table-responsive">
+                   
+                <table class="table">
+                          <thead class=" text-primary">
+                            <tr></tr>
+                            <th></th>
+                            <th>Item name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                          </thead>
+                          <tbody>
+                         {% for item in items %}
+                            <tr>
+                              <td><img src="{{item.product.imageURL}}" alt="product image" style = "width: 100px; height: 100px;" class="img-thumbnail rounded"></td>
+                              <td>{{item.product.name}}</td>
+                              <td>{{item.quantity}} <button class="float-right btn btn-sm btn-outline-info text-sharp" role="btn"><i class="fas fa-sort-down"></i></button> <button  href="" class="btn-sm float-right btn btn-outline-danger text-sharp update-cart" role="btn"><i class="fas fa-sort-up"></i></button> </td>
+                              <td>₱{{item.product.price|floatformat:2}}</td>  
+                              <td>₱{{item.get_total}}</td>      
+                            </tr>
+                          {% endfor %}
+                          <tr>
+                            <th>Items:<td>{{order.get_cart_items}}</td></th> 
+                            <td></td>
+                            <th>Total:</th>
+                            <td>₱{{order.get_cart_total|floatformat:2}}</td>
+                         </tr>
+                         <tr>
+                           <td colspan = "5"><a href="" class="float-right btn btn-outline-success text-sharp" role="btn"><i class="fas fa-shopping-bag"></i> Checkout</a></td>
+                          </tr>
+                          </tbody>
+                        </table>
+               </div>
+               </div>
+</div>
+{% endblock content %}
